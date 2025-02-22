@@ -175,7 +175,6 @@ for (const key in sonuc) {
 
 /* kodlar buraya */
 
-console.log('bos commit')
 /*  Bu satırın aşağısındaki kodları lütfen değiştirmeyin  */
 
 function sa() {
