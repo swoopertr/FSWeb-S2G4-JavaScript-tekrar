@@ -51,8 +51,8 @@ function KareninAlani(kenaruzunlugu) {
 	4. Hesaplanan çemberin çevresi döndürülecektir.
 */
 
-function CemberinCevresi(/* kodlar buraya */) {
-  /* kodlar buraya */
+function CemberinCevresi(yaricap) {
+  return 2 * pi *yaricap;
 }
 
 /* (Oto test yok) Yukarıdaki CemberinCevresi fonksiyonunu yarıçap = 5 vererek aşağıda çalıştırıp, sonucu konsolda gözlemleyin (console.log)  */
@@ -65,8 +65,8 @@ function CemberinCevresi(/* kodlar buraya */) {
 	4. Hesaplanan çemberin alanı döndürülecektir.
 */
 
-function CemberinAlani(/* kodlar buraya */) {
-  /* kodlar buraya */
+function CemberinAlani(yaricap) {
+  return pi * yaricap * yaricap;
 }
 
 /* (Oto test yok) Yukarıdaki CemberinAlani fonksiyonunu yarıçap = 15 vererek aşağıda çalıştırıp, sonucu konsolda gözlemleyin (console.log)  */
@@ -85,7 +85,8 @@ function CemberinAlani(/* kodlar buraya */) {
 		
 		3f. `tekraredensayilar` adında bir dizi oluşturun. sayilar dizisi içerisindeki bazı sayılar birden fazla kere yazılmış. sayilar dizisi içerisinde birden fazla kez yazılmış sayıları tespit ederek kaç kere tekrar edildiğini belirten bir string oluşturulup `tekraredensayilar` dizisine aktarılmasını istiyoruz. Örnek string: "{sayı} sayısı {tekrarSayisi} kere tekrar edilmiştir"
 		ÖRNEK: sayilar dizisi içerisinde 45 sayısı 3 kere yazılmış. "45 sayısı 3 tekrar edilmiştir" stringini `tekraredensayilar` dizisine aktaracağız.
-		💡 İPUCU: Tekrar edilen sayıları ve kaç kere tekrar edildiğini kaydetmek için bir nesne tanımlamalısınız, bu görevi yapabilmek için en az 2 kere döngü yazmalısınız. Birinci döngüde hangi sayının kaç kere tekrar edildiğini tespit edip, 2. döngüde stringi oluşturup verilen diziye aktarmalısınız.
+		💡 İPUCU: Tekrar edilen sayıları ve kaç kere tekrar edildiğini kaydetmek için bir nesne tanımlamalısınız, bu görevi yapabilmek için en az 2 kere döngü yazmalısınız. 
+    Birinci döngüde hangi sayının kaç kere tekrar edildiğini tespit edip, 2. döngüde stringi oluşturup verilen diziye aktarmalısınız.
 */
 
 /*  (oto test yok) sayilar dizisi içinde kaç adet sayı olduğunu konsola yazdırın */
@@ -99,26 +100,78 @@ let ucetambolunenler,
   tekraredensayilar;
 
 // 3a çözümü
+  //enkucuk = Math.min(...sayilar);
+  enkucuk = sayilar[0];
+  enbuyuk = sayilar[0];
+  for(let i = 1 ; i < sayilar.length; i++){
+    if(enkucuk > sayilar[i]){ // 45 > 0.02
+      enkucuk = sayilar[i];
+    }
+
+    if(enbuyuk < sayilar[i]){// 45 < 856
+      enbuyuk = sayilar[i];
+    }
+  }
+
 
 /* kodlar buraya */
 
 // 3b çözümü:
-
+ucetambolunenler = [];
+sayilar.forEach(sayi => {
+  if(sayi %3 === 0){
+    ucetambolunenler.push(sayi);
+  }
+})
 /* kodlar buraya */
 
 // 3c çözümü:
 
+//45, 15, 12, 3
+// 0, 45
+// 45, 15
+// 60, 12
+// 72, 3
+ucebolunenlerintoplami = ucetambolunenler.reduce((previous, current) => { 
+  return previous + current;
+} ,0);
+
+
 /* kodlar buraya */
 
 // 3d çözümü
-
+besyuzdenkucuksayilar = sayilar.filter(sayi => sayi < 500);
 /* kodlar buraya */
 
 // 3e çözümü
+siralisayilar = besyuzdenkucuksayilar.sort((a, b) => a - b)
 
 /* kodlar buraya */
 
 // 3f çözümü
+tekraredensayilar = [];
+let sonuc = {};
+sayilar.forEach(sayi => {
+  if(!sonuc[sayi]){
+    sonuc[sayi] = 1;
+  }else {
+    sonuc[sayi] +=1;
+  }
+})
+//console.log(sonuc);
+for (const key in sonuc) {
+    if(sonuc[key] === 1){
+      delete sonuc[key]
+    }
+}
+
+console.log(sonuc);
+//45 sayısı 3 tekrar edilmiştir
+
+for (const key in sonuc) {
+  tekraredensayilar.push(`${key} sayısı ${sonuc[key]} kere tekrar edilmiştir`);
+}
+
 
 /* kodlar buraya */
 
